@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { put, takeEvery, delay} from 'redux-saga/effects'
+import { put, takeEvery, delay} from 'redux-saga/effects';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
@@ -33,7 +34,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(sagaMiddleware)
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 
 sagaMiddleware.run(rootSaga)
